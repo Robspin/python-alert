@@ -4,8 +4,14 @@ import time
 
 url = ""
 
+io.setmode(io.BCM)
+led_red = 27
+led_blue = 22
+io.setup(led_red, io.OUT)
+io.setup(led_blue, io.OUT)
 
-def operational():
+
+def api_get_statuses():
     category_statuses = []
     try:
         res = requests.get(url)
@@ -13,19 +19,12 @@ def operational():
         for category in data:
             services_statuses = [service['operational'] for service in category['statuses']]
             category_statuses = category_statuses + services_statuses
-    except Exception as error:
-        print(error)
+    except Exception as e:
+        print(e)
     finally:
         if all(category_statuses):
             return True
         return False
-
-
-io.setmode(io.BCM)
-led_red = 27
-led_blue = 22
-io.setup(led_red, io.OUT)
-io.setup(led_blue, io.OUT)
 
 
 def green_light():
@@ -45,7 +44,7 @@ def red_light():
 try:
     while True:
         timeout = time.time() + 60 * 5
-        result = operational()
+        result = api_get_statuses()
         while time.time() < timeout:
             if result:
                 green_light()
@@ -55,8 +54,8 @@ try:
 except KeyboardInterrupt:
     print("Keyboard interrupt")
 
-except Exception as error:
-    print(error)
+except Exception as e:
+    print(e)
 
 finally:
     io.cleanup()
