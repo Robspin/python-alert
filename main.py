@@ -11,7 +11,7 @@ def operational():
         res = requests.get(url)
         data = res.json()
         for category in data:
-            new_list = [service['operational'] for service in  category['statuses']]
+            new_list = [service['operational'] for service in category['statuses']]
             category_statuses = new_list
     except Exception as error:
         print(error)
@@ -28,8 +28,6 @@ led_red = 27
 led_blue = 22
 io.setup(led_red, io.OUT)
 io.setup(led_blue, io.OUT)
-
-result = operational()
 
 
 def green_light():
@@ -48,10 +46,13 @@ def red_light():
 
 try:
     while True:
-        if result:
-            green_light()
-        else:
-            red_light()
+        timeout = time.time() + 60 * 5
+        result = operational()
+        while time.time() < timeout:
+            if result:
+                green_light()
+            else:
+                red_light()
 
 except KeyboardInterrupt:
     print("Keyboard interrupt")
