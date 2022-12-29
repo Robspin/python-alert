@@ -11,13 +11,11 @@ def operational():
         res = requests.get(url)
         data = res.json()
         for category in data:
-            new_list = [service['operational'] for service in category['statuses']]
-            category_statuses = new_list
+            services_statuses = [service['operational'] for service in category['statuses']]
+            category_statuses = category_statuses + services_statuses
     except Exception as error:
         print(error)
     finally:
-        print(category_statuses)
-        print(all(category_statuses))
         if all(category_statuses):
             return True
         return False
