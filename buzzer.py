@@ -12,7 +12,7 @@ pin7.start(50)
 
 def sound_the_alarm(times):
   i = 0
-  while i < times - 1:
+  while i < times:
     io.output(buzzer, io.HIGH)
     pin7.ChangeFrequency(16.35) # C0
     sleep(0.25)
