@@ -12,8 +12,8 @@ io.setup(buzzer, io.OUT)
 
 i = 0
 while i < length:
-    io.output(buzzer, io.HIGH)
+    io.output(buzzer, 100)
     sleep(0.5)
-    io.output(buzzer, io.LOW)
+    io.output(buzzer, 10)
     sleep(0.5)
     i += 1
