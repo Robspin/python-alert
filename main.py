@@ -3,6 +3,7 @@ import RPi.GPIO as io
 import time
 
 from helpers import config
+from buzzer import sound_the_alarm
 
 url = config['status-api']['url']
 
@@ -28,7 +29,9 @@ def api_get_statuses():
     finally:
         if all(category_statuses):
             return True
-        return False
+        else:
+            sound_the_alarm(2)
+            return False
 
 
 def green_light():
