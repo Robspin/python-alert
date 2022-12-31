@@ -26,8 +26,8 @@ def api_get_statuses():
     except Exception as e:
         print(e)
     finally:
-        # if all(category_statuses):
-        #     return True
+        if all(category_statuses):
+            return True
         return False
 
 

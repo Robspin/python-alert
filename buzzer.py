@@ -2,7 +2,7 @@ import RPi.GPIO as io
 from time import sleep
 
 io.setmode(io.BCM)
-buzzer = 23
+buzzer = 26
 io.setup(buzzer, io.OUT)
 
 while True:
