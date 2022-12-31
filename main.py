@@ -3,12 +3,11 @@ import RPi.GPIO as io
 import time
 
 from helpers import config
+from led import green_light, red_light
 from buzzer import sound_the_alarm
 
 url = config['status-api']['url']
 API_REFRESH_INTERVAL = 60 * 5
-LED_RED = 27
-LED_BLUE = 22
 
 
 def api_get_statuses():
@@ -27,26 +26,6 @@ def api_get_statuses():
         else:
             sound_the_alarm(2)
             return False
-
-
-def green_light():
-    io.setmode(io.BCM)
-    io.setup(LED_RED, io.OUT)
-    io.setup(LED_BLUE, io.OUT)
-    io.output(LED_RED, False)
-    io.output(LED_BLUE, True)
-    time.sleep(1)
-
-
-def red_light():
-    io.setmode(io.BCM)
-    io.setup(LED_RED, io.OUT)
-    io.setup(LED_BLUE, io.OUT)
-    io.output(LED_BLUE, False)
-    io.output(LED_RED, True)
-    time.sleep(1)
-    io.output(LED_RED, False)
-    time.sleep(1)
 
 
 try:
