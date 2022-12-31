@@ -2,13 +2,17 @@ import requests
 import RPi.GPIO as io
 import time
 
-url = ""
+from helpers import config
+
+url = config['status-api']['url']
+
 
 io.setmode(io.BCM)
-led_red = 27
-led_blue = 22
-io.setup(led_red, io.OUT)
-io.setup(led_blue, io.OUT)
+API_REFRESH_INTERVAL = 60 * 5
+LED_RED = 27
+LED_BLUE = 22
+io.setup(LED_RED, io.OUT)
+io.setup(LED_BLUE, io.OUT)
 
 
 def api_get_statuses():
@@ -28,22 +32,22 @@ def api_get_statuses():
 
 
 def green_light():
-    io.output(led_red, False)
-    io.output(led_blue, True)
+    io.output(LED_RED, False)
+    io.output(LED_BLUE, True)
     time.sleep(1)
 
 
 def red_light():
-    io.output(led_blue, False)
-    io.output(led_red, True)
+    io.output(LED_BLUE, False)
+    io.output(LED_RED, True)
     time.sleep(1)
-    io.output(led_red, False)
+    io.output(LED_RED, False)
     time.sleep(1)
 
 
 try:
     while True:
-        timeout = time.time() + 60 * 5
+        timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
         while time.time() < timeout:
             if result:
