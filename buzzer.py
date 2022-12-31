@@ -4,7 +4,7 @@ from time import sleep
 io.setmode(io.BCM)
 buzzer = 26
 io.setup(buzzer, io.OUT)
-tone1 = GPIO.PWM(buzzer, 100)
+tone1 = io.PWM(buzzer, 100)
 tone1.start(50)
 
 c = [32, 65, 131, 262, 523]
