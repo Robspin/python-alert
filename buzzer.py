@@ -4,12 +4,8 @@ from time import sleep
 # length = 6
 
 io.setwarnings(False)
-# io.setmode(io.BCM)
-buzzer = 26
-# io.setup(buzzer, io.OUT)
-# tone1 = io.PWM(buzzer, 100)
-# tone1.start(50)
 io.setmode(io.BCM)
+buzzer = 26
 io.setup(buzzer, io.OUT)
 pin7 = io.PWM(buzzer, 100)
 pin7.start(50)
