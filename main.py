@@ -22,7 +22,7 @@ def api_get_statuses():
     except Exception as e:
         print(e)
     finally:
-        if not all(category_statuses):
+        if all(category_statuses):
             return True
         else:
             sound_the_alarm(2)
