@@ -35,5 +35,6 @@ def sound_the_alarm(times):
     audio_pin.ChangeFrequency(16.35) # C0
     sleep(0.25)
     io.output(buzzer, io.LOW)
+    io.cleanup()
     sleep(0.25)
     i += 1
