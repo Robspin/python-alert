@@ -6,14 +6,9 @@ from helpers import config
 from buzzer import sound_the_alarm
 
 url = config['status-api']['url']
-
-
-io.setmode(io.BCM)
 API_REFRESH_INTERVAL = 60 * 5
 LED_RED = 27
 LED_BLUE = 22
-io.setup(LED_RED, io.OUT)
-io.setup(LED_BLUE, io.OUT)
 
 
 def api_get_statuses():
@@ -49,6 +44,10 @@ def red_light():
 
 
 try:
+    io.setmode(io.BCM)
+    io.setup(LED_RED, io.OUT)
+    io.setup(LED_BLUE, io.OUT)
+
     while True:
         timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
