@@ -11,7 +11,7 @@ tone1 = io.PWM(buzzer, 100)
 tone1.start(50)
 
 i = 0
-while i < 0:
+while i < length:
     io.output(buzzer, io.HIGH)
     sleep(0.5)
     io.output(buzzer, io.LOW)
