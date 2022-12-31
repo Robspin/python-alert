@@ -56,7 +56,7 @@ def playSong(songnotes, songbeats, tempo):
     tone1.ChangeDutyCycle(50)
     for i in range(0, len(songnotes)):
         tone1.ChangeFrequency(songnotes[i])
-        time.sleep(songbeats[i] * tempo)
+        sleep(songbeats[i] * tempo)
     tone1.ChangeDutyCycle(0)
 
 
