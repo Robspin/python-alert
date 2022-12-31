@@ -19,7 +19,7 @@ pin7.start(50)
 #     i += 1
 
 while True:
-  io.output(7, io.HIGH)
+  io.output(buzzer, io.HIGH)
   pin7.ChangeFrequency(16.35) # C0
   sleep(1)
   pin7.ChangeFrequency(261.63) # C4
@@ -40,5 +40,5 @@ while True:
   sleep(1.5)
   pin7.ChangeFrequency(16.35) # C0
   sleep(1)
-  io.output(7, io.LOW)
+  io.output(buzzer, io.LOW)
   sleep(1)
