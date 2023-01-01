@@ -3,7 +3,7 @@ from datetime import datetime
 import RPi.GPIO as io
 import time
 
-from helpers import config
+from helpers import config, local_time
 from led import green_light, red_light
 from buzzer import sound_the_alarm
 from oled import show_stats_on_oled
@@ -34,8 +34,7 @@ try:
     while True:
         timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
-        now = datetime.now()
-        time_checked = now.time()
+        time_checked = local_time()
         while time.time() < timeout:
             if result:
                 green_light()
