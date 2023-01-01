@@ -3,7 +3,7 @@ from datetime import datetime
 import RPi.GPIO as io
 import time
 
-from helpers import config, local_time
+from helpers import config, get_UTC_time
 from led import green_light, red_light
 from buzzer import sound_the_alarm
 from oled import show_stats_on_oled
@@ -23,7 +23,7 @@ def api_get_statuses():
     except Exception as e:
         print(e)
     finally:
-        if not all(category_statuses):
+        if all(category_statuses):
             return True
         else:
             sound_the_alarm(2)
@@ -34,7 +34,7 @@ try:
     while True:
         timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
-        time_checked = local_time()
+        time_checked = get_UTC_time()
         while time.time() < timeout:
             if result:
                 green_light()
