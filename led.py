@@ -27,3 +27,5 @@ def red_light():
     time.sleep(1)
     io.output(LED_RED, False)
     time.sleep(1)
+    io.output(LED_RED, True)
+    time.sleep(1)
