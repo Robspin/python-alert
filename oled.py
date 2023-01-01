@@ -41,7 +41,7 @@ font = ImageFont.truetype('PixelOperator.ttf', 16)
 # font = ImageFont.load_default()
 
 
-def show_stats_on_oled():
+def show_stats_on_oled(time_checked):
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, oled.width, oled.height), outline=0, fill=0)
 
@@ -58,7 +58,8 @@ def show_stats_on_oled():
     Temp = subprocess.check_output(cmd, shell=True)
 
     # Pi Stats Display
-    draw.text((0, 0), "IP: " + str(IP, 'utf-8'), font=font, fill=255)
+    # draw.text((0, 0), "IP: " + str(IP, 'utf-8'), font=font, fill=255)
+    draw.text((0, 0), "Last checked: " + str(time_checked, 'utf-8'), font=font, fill=255)
     draw.text((0, 16), str(CPU, 'utf-8') + "LA", font=font, fill=255)
     draw.text((80, 16), str(Temp, 'utf-8'), font=font, fill=255)
     draw.text((0, 32), str(MemUsage, 'utf-8'), font=font, fill=255)

@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 import RPi.GPIO as io
 import time
 
@@ -33,13 +34,14 @@ try:
     while True:
         timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
+        time_checked = datetime.now()
         while time.time() < timeout:
             if result:
                 green_light()
-                show_stats_on_oled()
+                show_stats_on_oled(time_checked)
             else:
                 red_light()
-                show_stats_on_oled()
+                show_stats_on_oled(time_checked)
 
 except KeyboardInterrupt:
     print("Keyboard interrupt")
