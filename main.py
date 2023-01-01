@@ -34,7 +34,8 @@ try:
     while True:
         timeout = time.time() + API_REFRESH_INTERVAL
         result = api_get_statuses()
-        time_checked = datetime.now()
+        now = datetime.now()
+        time_checked = now.time()
         while time.time() < timeout:
             if result:
                 green_light()
