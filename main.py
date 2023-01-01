@@ -5,9 +5,10 @@ import time
 from helpers import config
 from led import green_light, red_light
 from buzzer import sound_the_alarm
+from oled import show_stats_on_oled
 
 url = config['status-api']['url']
-API_REFRESH_INTERVAL = 60 * 5
+API_REFRESH_INTERVAL = 60 * 1
 
 
 def api_get_statuses():
@@ -21,7 +22,7 @@ def api_get_statuses():
     except Exception as e:
         print(e)
     finally:
-        if all(category_statuses):
+        if not all(category_statuses):
             return True
         else:
             sound_the_alarm(2)
@@ -35,8 +36,10 @@ try:
         while time.time() < timeout:
             if result:
                 green_light()
+                show_stats_on_oled()
             else:
                 red_light()
+                show_stats_on_oled()
 
 except KeyboardInterrupt:
     print("Keyboard interrupt")
