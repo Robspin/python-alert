@@ -1,5 +1,4 @@
 import requests
-from datetime import datetime
 import RPi.GPIO as io
 import time
 
@@ -9,7 +8,7 @@ from buzzer import sound_the_alarm
 from oled import show_stats_on_oled
 
 url = config['status-api']['url']
-API_REFRESH_INTERVAL = 60 * 1
+API_REFRESH_INTERVAL = 60 * 2
 
 
 def api_get_statuses():
